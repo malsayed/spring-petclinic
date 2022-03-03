@@ -24,14 +24,11 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         projectBaseDir: "."
-        # args: >
-        #   -Dsonar.organization=my-organization
-        #   -Dsonar.projectKey=my-projectkey
-        #   -Dsonar.python.coverage.reportPaths=coverage.xml
-        #   -Dsonar.sources=lib/
-        #   -Dsonar.test.exclusions=tests/**
-        #   -Dsonar.tests=tests/
-        #   -Dsonar.verbose=true
+        args: >
+          -Dsonar.organization=my-organization
+          -Dsonar.projectKey=pet-clinic
+          -Dsonar.tests=src/test/
+          -Dsonar.verbose=true
     - name: SonarQube Quality Gate check
       uses: sonarsource/sonarqube-quality-gate-action@master
       # Force to fail step after specific time
