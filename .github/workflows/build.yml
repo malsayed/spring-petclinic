@@ -1,5 +1,5 @@
 on: pull_request
-name: Main Workflow
+name: SonarQube Check
 jobs:
   sonarQubeTrigger:
     name: SonarQube Trigger
@@ -8,6 +8,19 @@ jobs:
     - uses: actions/checkout@master
     - name: SonarQube Scan
       uses: kitabisa/sonarqube-action@v1.1.1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         host: ${{ secrets.SONARQUBE_HOST }}
         login: ${{ secrets.SONARQUBE_TOKEN }}
+        projectBaseDir: "."
+        # args: >
+        #   -Dsonar.organization=my-organization
+        #   -Dsonar.projectKey=my-projectkey
+        #   -Dsonar.python.coverage.reportPaths=coverage.xml
+        #   -Dsonar.sources=lib/
+        #   -Dsonar.test.exclusions=tests/**
+        #   -Dsonar.tests=tests/
+        #   -Dsonar.verbose=true
+        projectKey: "petclinic"
+        projectName: "petclinic"
