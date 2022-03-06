@@ -21,5 +21,13 @@ pipeline {
             }
 
             }
+        stage('SonarQube Analysis') {
+            withSonarQubeEnv(credentialsId: 'SQToken', installationName: 'SonarQube') { // You can override the credential to be used
+                // sh './mvnw org.sonarsource.scanner.maven:sonar-maven-plugin:4.7.0.2747:sonar'
+                sh './mvn clean package sonar:sonar'
+
+            }
+        }
+
         }
     }
